@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* Avoid scrollbars for the infinite canvas feel */
+  background-color: #f8f9fa;
+  /* Light dotted grid background resembling Miro */
+  background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+  background-size: 20px 20px;
+}
