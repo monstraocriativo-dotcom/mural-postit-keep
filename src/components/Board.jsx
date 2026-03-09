@@ -68,6 +68,21 @@ export default function Board() {
         }
     };
 
+    const updateColor = async (id, newColor) => {
+        setNotes((prev) =>
+            prev.map((note) => (note.id === id ? { ...note, color: newColor } : note))
+        );
+
+        if (user) {
+            const { error } = await supabase
+                .from('notes')
+                .update({ color: newColor })
+                .eq('id', id)
+                .eq('user_id', user.id);
+            if (error) console.error("Erro ao atualizar cor no Supabase:", error);
+        }
+    };
+
     const addNote = async () => {
         if (!user) {
             console.error("Erro: Tentativa de criar nota sem usuário logado no Clerk.");
@@ -118,6 +133,7 @@ export default function Board() {
                     note={note}
                     updatePosition={updatePosition}
                     updateContent={updateContent}
+                    updateColor={updateColor}
                 />
             ))}
             <button
